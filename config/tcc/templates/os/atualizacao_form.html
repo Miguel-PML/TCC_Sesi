@@ -1,0 +1,22 @@
+{% extends 'os/base.html' %}
+{% block content %}
+<div class="col-md-6 mx-auto">
+    <div class="card">
+        <div class="card-header bg-dark">
+            Atualizar Status da OS: <strong>{{ os.codigo_consulta }}</strong>
+        </div>
+        <div class="card-body">
+            <p><strong>Equipamento:</strong> {{ os.equipamento }}</p>
+            <hr>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-custom">Confirmar Atualização</button>
+                    <a href="{% url 'detalhe_os' os.id %}" class="btn btn-custom-dois">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

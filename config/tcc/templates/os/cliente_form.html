@@ -1,0 +1,20 @@
+{% extends 'os/base.html' %}
+{% block content %}
+<div class="col-md-6 mx-auto">
+    <div class="card">
+        <div class="card-header bg-custom-cliente text-white">Novo Cliente</div>
+        
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <hr>
+                
+                <button type="submit" class="btn btn-custom">Salvar Cliente</button>
+                
+                <a href="{% url 'lista_os' %}" class="btn btn-custom-dois">Cancelar</a>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

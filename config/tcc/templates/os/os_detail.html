@@ -1,0 +1,67 @@
+{% extends 'os/base.html' %}
+
+{% block content %}
+<div class="row mb-3">
+    <div class="col-md-8">
+        <h2>Ordem de Serviço: <span class="text-primary">{{ os.codigo_consulta }}</span></h2>
+    </div>
+    <div class="col-md-4 text-end">
+        <a href="{% url 'atualizar_status' os.id %}" class="btn btn-warning btn-lg">
+            ⚡ Atualizar Status
+        </a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-5 mb-4">
+        <div class="card mb-3">
+            <div class="card-header bg-secondary text-white">Dados do Equipamento</div>
+            <div class="card-body">
+                <h5 class="card-title">{{ os.equipamento.tipo }} - {{ os.equipamento.marca }}</h5>
+                <p class="card-text">
+                    <strong>Modelo:</strong> {{ os.equipamento.modelo }}<br>
+                    <strong>Nº Série:</strong> {{ os.equipamento.numero_serie|default:"-" }}
+                </p>
+            </div>
+        </div>
+
+        <div class="card mb-3">
+            <div class="card-header bg-secondary text-white">Dados do Cliente</div>
+            <div class="card-body">
+                <h5 class="card-title">{{ os.cliente.nome }}</h5>
+                <p class="card-text">
+                    <strong>Tel:</strong> {{ os.cliente.telefone }}<br>
+                    <strong>Email:</strong> {{ os.cliente.email }}
+                </p>
+            </div>
+        </div>
+
+        <div class="alert alert-danger">
+            <strong>Defeito Relatado:</strong><br>
+            {{ os.defeito_relatado }}
+        </div>
+    </div>
+
+    <div class="col-md-7">
+        <div class="card">
+            <div class="card-header bg-dark text-white">Histórico de Andamento</div>
+            <div class="list-group list-group-flush">
+                {% for item in historico %}
+                <div class="list-group-item">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">{{ item.get_novo_status_display }}</h5>
+                        <small class="text-muted">{{ item.data_atualizacao|date:"d/m/Y H:i" }}</small>
+                    </div>
+                    <p class="mb-1">{{ item.observacoes }}</p>
+                </div>
+                {% empty %}
+                <div class="list-group-item">Sem histórico registado.</div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="mt-3">
+    <a href="{% url 'lista_os' %}" class="btn btn-outline-secondary">Voltar para a Lista</a>
+</div>
+{% endblock %}
