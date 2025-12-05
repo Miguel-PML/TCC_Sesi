@@ -1,0 +1,19 @@
+# .gitignore
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Django
+*.log
+db.sqlite3
+media/
+
+# Ambientes Virtuais (ajuste se a sua pasta tiver outro nome, ex: .venv)
+venv/
+env/
+.env
+
+# VS Code (se usar)
+.vscode/
